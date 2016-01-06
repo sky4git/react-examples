@@ -1,3 +1,8 @@
+/**
+* PaintingChoices component
+* @author: Aakash
+* @website: http://developersq.com
+*/
 // PaintingChoices Component 
 var PaintingChoices = React.createClass({    
     render: function(props){

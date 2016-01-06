@@ -3,6 +3,7 @@
 * @author: Aakash
 * @website: http://developersq.com
 */
+
 // RadioGroup child component
 var RadioGroup = React.createClass({
 
@@ -12,6 +13,7 @@ var RadioGroup = React.createClass({
       checked: 'swimming'
     };
   },
+  
   // handle change event - pass data to AppActions
   handleChange: function(event){
     var input = event.target;

@@ -3,6 +3,7 @@
 * @author: Aakash
 * @website: http://developersq.com
 */
+
 // Label child-component 
 var Label = React.createClass({    
     render: function(props){

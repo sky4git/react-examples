@@ -1,5 +1,5 @@
 /**
-* CheckBox component
+* Checkbox component
 * @author: Aakash
 * @website: http://developersq.com
 */

@@ -3,10 +3,17 @@ var AppConstants = require('../constants/AppConstants'); //scope:local
 var EventEmitter = require('events').EventEmitter; //scope:local
 var assign = require('object-assign'); //scope:local
 
-var ActionTypes = AppConstants.ActionTypes; //scope:local
-var CHANGE_EVENT = 'change'; //scope:local
+var ActionTypes = AppConstants.ActionTypes;
+var CHANGE_EVENT = 'change';
 
 var AppStore = assign({}, EventEmitter.prototype, {
+  /**
+   * get initial data load status
+   */
+  getDataLoadStatus: function(){
+    var dataLoadStatus = sessionStorage.getItem('isDataLoading');
+    return JSON.parse(dataLoadStatus);  
+  },  
   /**
    * Get status method for the components
    */ 
@@ -20,6 +27,13 @@ var AppStore = assign({}, EventEmitter.prototype, {
   getChoiceValue : function(){
     var newChoice = sessionStorage.getItem('newChoice');
     return newChoice;
+  },
+  /**
+   * Get new posts
+   */
+  getNewPosts: function(){
+      var posts = sessionStorage.getItem('posts');
+      return JSON.parse(posts);
   },
   /**
    * Emit change
@@ -44,8 +58,13 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 
 AppDispatcher.register(function(payload){
-  //console.log(payload);  
+  //console.log(payload.source);  
   switch (payload.source) {
+    case ActionTypes.INITIAL_AJAX_DATA_LOAD:
+      var initialLoad = true; 
+      sessionStorage.setItem('isDataLoading', JSON.stringify(initialLoad));
+      AppStore.emitChange();
+    break;  
     case ActionTypes.CHECKBOX_CHECKED:
       var newStatus = payload.action.item ? false : true;      
       sessionStorage.setItem('newStatus', JSON.stringify(newStatus));
@@ -53,8 +72,15 @@ AppDispatcher.register(function(payload){
     break;
     case ActionTypes.SEND_VALUE:
       var newChoice = payload.action.item;
+      sessionStorage.setItem('isDataLoading', JSON.stringify(true));
       sessionStorage.setItem('newChoice', newChoice);
       AppStore.emitChange(); 
+    break;
+    case 'RECEIVE_DATA_DISPATCHED':
+      var posts = payload.action.dataArr; 
+      sessionStorage.setItem('isDataLoading', JSON.stringify(false));
+      sessionStorage.setItem('posts',  JSON.stringify(posts));
+      AppStore.emitChange();
     break;
   }
   return true;

@@ -1,7 +1,8 @@
 /**
-* App component
-* @author: Aakash
-* @website: http://developersq.com
+* App.jsx
+* Main component for the application.
+* @author: Aakash Dodiya
+* @website: http://www.developersq.com
 */
 
 AppActions = require('../actions/AppActions'); //scope:global
@@ -12,37 +13,87 @@ var RadioGroup = require('./RadioGroup.jsx'); //scope:local
 var InputCom = require('./InputCom.jsx'); //scope:local
 var SwimmmingChoices = require('./SwimmmingChoices.jsx'); //scope:local
 var PaintingChoices = require('./PaintingChoices.jsx'); //scope:local
+var LoadingMessage = require('./LoadingMessage.jsx'); //scope:local
 
-// App component
+// main App component
 var App = React.createClass({
+    
   // get initial state
   getInitialState: function() {
     return {
       radioValue: 'swimming',
+      dataLoadingStatus: false   
     };
   },
+  
+  // before component render lets load initial ajax data 
+  componentWillMount: function(){
+      var dataFor; 
+      if(this.state.radioValue == 'swimming'){
+          dataFor = 'swimming';
+      }else{
+          dataFor = 'painting';
+      }
+      AppActions.loadInitialAjaxData(dataFor);
+      
+      /**
+      * lets check data load status
+      * this is useful to show on screen that we are loading something
+      */
+      var isDataLoading = AppStore.getDataLoadStatus();
+      if(isDataLoading){
+          this.setState({
+              dataLoadingStatus : true
+          })          
+      }   
+  },
+  
   // invoked immediately after mounting occurs. Initialization that requires DOM nodes should go here.
   componentDidMount: function() {
       AppStore.addChangeListener(this._onChange);
   },
+  
   // invoked immediately before a component is unmounted and destroyed. Cleanup should go here.
   componentWillUnmount: function() {
       AppStore.removeChangeListener(this._onChange);
   },
+  
   // on change event
-  _onChange : function(){     
+  _onChange : function(){
+      /**
+      * once we get change event from store we should hide data loading text or animation 
+      */ 
+      var isDataLoading = AppStore.getDataLoadStatus(); 
+      if(isDataLoading){
+          this.setState({ dataLoadingStatus : true   })          
+      }else{
+          this.setState({ dataLoadingStatus : false   })
+      }  
+      /**
+      * change choice value on onchange event  
+      */ 
       this.setState({
           radioValue : AppStore.getChoiceValue()
       });
   },
+  
   // render component 
   render: function() {
-    var magChoices;  
-   // console.log(this.state.radioValue); 
+    /**
+    * check loading status
+    */  
+    var loadingMessage; console.log('loadingstatus:'+this.state.dataLoadingStatus);
+    if(this.state.dataLoadingStatus){
+        loadingMessage =  <LoadingMessage />   
+    }    
+    /**
+    * check dataChoices status
+    */         
+    var dataChoices;     
     if(this.state.radioValue == 'swimming'){
-       magChoices = <SwimmmingChoices />;
+       dataChoices = <SwimmmingChoices />;
     }else{
-       magChoices = <PaintingChoices />;
+       dataChoices = <PaintingChoices />;
     }
     return( 
       <form>  
@@ -71,7 +122,8 @@ var App = React.createClass({
               <Label text='Hobbies:'/>
               <RadioGroup />
           </div>
-          {magChoices}
+          {loadingMessage}
+          {dataChoices}
           
      </form> 
     );

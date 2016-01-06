@@ -1,3 +1,8 @@
+/**
+* SwimmmingChoices component
+* @author: Aakash
+* @website: http://developersq.com
+*/
 // SwimmmingChoices Component 
 var SwimmmingChoices = React.createClass({    
     render: function(props){

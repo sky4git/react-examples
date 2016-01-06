@@ -1,0 +1,53 @@
+/**
+* SwimmmingChoices component
+* @author: Aakash
+* @website: http://developersq.com
+*/
+
+var Post = require('./Post.jsx'); //scope:local
+
+// SwimmmingChoices Component 
+var SwimmmingChoices = React.createClass({  
+  // setting initial states
+  getInitialState: function() {
+    return {
+      data: {posts: []},  
+    };
+  },  
+  // invoked immediately after mounting occurs. Initialization that requires DOM nodes should go here.
+  componentDidMount: function() {
+     // console.log('componentDidMount: '+this.state.data.posts.length);
+      // change data on store change event
+      AppStore.addChangeListener(this._onChange);     
+  },
+  // invoked immediately before a component is unmounted and destroyed. Cleanup should go here.
+  componentWillUnmount: function() {
+      AppStore.removeChangeListener(this._onChange);
+  },
+  // on change event
+  _onChange : function(){ 
+      this.setState({
+          data : AppStore.getNewPosts()
+      });
+  },   
+  // render      
+  render: function(props){
+      var result = this.state.data;
+           
+      return(
+          <div>
+             <hr/>
+             <h2>Related posts</h2>
+             {
+                result.posts.map(function(post, i) {
+                    return <Post title={post.title} url={post.url} key={i}/>
+                })
+             }
+		 </div> 
+         
+      );  
+   } 
+    
+});
+
+module.exports = SwimmmingChoices;
