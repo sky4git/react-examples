@@ -12,7 +12,7 @@ var PaintingChoices = React.createClass({
   // setting initial states
   getInitialState: function() {
     return {
-      data: {posts: []},      
+      data: '',      
     };
   },
   // invoked immediately after mounting occurs. Initialization that requires DOM nodes should go here.
@@ -32,15 +32,17 @@ var PaintingChoices = React.createClass({
    // render
    render: function(props){
       var result = this.state.data;  
+      var posts = []; 
+      if(result.length > 0){  
+          result.map(function(post, i) { 
+              posts.push(<Post title={post.title.rendered} url={post.link} key={i} />);
+          });         
+      }    
       return(
           <div>
              <hr/>
              <h2>Related posts</h2>
-             {
-                result.posts.map(function(post, i) {
-                    return <Post title={post.title} url={post.url} key={i}/>
-                })
-             }
+             {posts.length ? posts : null }
 		 </div> 
          
       );  

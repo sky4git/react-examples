@@ -12,15 +12,14 @@ module.exports = {
         
         var ajaxSource = this.getAjaxSource(value); 
         //var dataArr;
-        //var timeout = 5000;
+      //  var timeout = 5000;
         if(ajaxSource !== ''){
             //set initial ajax request
             $.get(ajaxSource, function(result) {
                 // Parse json string into JavaScript array
                 //dataArr = JSON.parse(result); 
                 //setTimeout(function() { 
-                    console.log(result);
-                    //AppActions.receiveData(result);
+                    AppActions.receiveData(result);
                // }, timeout);
                 
             });
@@ -33,14 +32,14 @@ module.exports = {
         if(value){ 
             switch(value){
                 case 'painting':
-                    return 'http://localhost/wordpressbeta/wp-json/wp/v2/posts/?taxonomy=painting';
+                    return 'http://localhost/wordpressbeta/wp-json/wp/v2/posts?filter[category_name]=painting';
                 break;
                 case 'swimming':
-                    return 'http://localhost/wordpressbeta/wp-json/wp/v2/posts/?taxonomy=swimming';
+                    return 'http://localhost/wordpressbeta/wp-json/wp/v2/posts?filter[category_name]=swimming';
                 break;
-               /* default:
-                    return 'http://localhost/wordpressbeta/wp-json/wp/v2/posts/?taxonomy=category';
-                break;*/
+                default:
+                    return 'http://localhost/wordpressbeta/wp-json/wp/v2/posts?filter[category_name]=blog';
+                break;
             }
         }
         

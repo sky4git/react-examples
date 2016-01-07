@@ -16,7 +16,6 @@ var SwimmmingChoices = React.createClass({
   }, 
   // invoked immediately after mounting occurs. Initialization that requires DOM nodes should go here.
   componentDidMount: function() {
-     // console.log('componentDidMount: '+this.state.data.posts.length);
       // change data on store change event
       AppStore.addChangeListener(this._onChange);     
   },
@@ -35,7 +34,7 @@ var SwimmmingChoices = React.createClass({
       var result = this.state.data;
       var posts = []; 
       if(result.length > 0){  
-          result.map(function(post, i) {
+          result.map(function(post, i) { 
               posts.push(<Post title={post.title.rendered} url={post.link} key={i} />);
           });         
       }    
