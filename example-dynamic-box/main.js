@@ -46,7 +46,7 @@ var TestStyle = React.createClass({
 		return(
 			<div>
 				<p> Section width : <input type="number" min='100' max='1000' value={dwidth} onChange={this.handleWidthChange} /></p>
-        <p> Section height : <input type="number" min='100' max='500' value={dheight} onChange={this.handleHeightChange} /></p>				
+                <p> Section height : <input type="number" min='100' max='500' value={dheight} onChange={this.handleHeightChange} /></p>				
 				<div style={divStyle}/>
 			</div>
 		);

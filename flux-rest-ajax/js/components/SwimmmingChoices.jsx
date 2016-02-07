@@ -42,7 +42,7 @@ var SwimmmingChoices = React.createClass({
           <div>
              <hr/>
              <h2>Related posts</h2>
-             {posts.length ? posts : null }
+             { posts.length ? posts : null }
 		 </div>          
       );  
    } 
