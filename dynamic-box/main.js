@@ -1,27 +1,6 @@
-/*var LikeButton = React.createClass({
-  getInitialState: function() {
-    return {liked: false};
-  },
-  handleClick: function(event) {
-    this.setState({liked: !this.state.liked});
-  },
-  render: function() {
-    var text = this.state.liked ? 'like' : 'haven\'t liked';
-    return (
-      <button onClick={this.handleClick}>
-        You {text} this. Click to toggle.
-      </button>
-    );
-  }
-});
 
-ReactDOM.render(
-  <LikeButton />,
-  document.getElementById('example')
-);*/
-
-//* test styles
-var TestStyle = React.createClass({
+//* DynamicBox
+var DynamicBox = React.createClass({
   getInitialState: function(){
    // var dwidth;
     return { dwidth:'100', dheight:'100' };
@@ -54,10 +33,6 @@ var TestStyle = React.createClass({
 });
 
 ReactDOM.render(
-  <TestStyle 
-    ref={function(input) {
-         // alert('test');
-      }}
-  />,
-  document.getElementById('testStyle')
+  <DynamicBox />,
+  document.getElementById('example')
 );
