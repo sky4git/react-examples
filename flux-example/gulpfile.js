@@ -16,7 +16,7 @@ var notify = require("gulp-notify");
 gulp.task('browserify', function() {
     var bundler = browserify({
         entries: ['./js/main.jsx'], // Only need initial file, browserify finds the deps
-        transform: [[reactify, {"es6": true, "extension": "jsx"}]], // We want to convert JSX to normal javascript
+     //   transform: [[reactify, {"es6": true, "extension": "jsx"}]], // We want to convert JSX to normal javascript
         debug: true, // Gives us sourcemapping
         cache: {}, packageCache: {}, fullPaths: true, // Requirement of watchify
     }).on('error', function(err) {

@@ -1,11 +1,15 @@
 {
-  "name": "flux-example",
-  "version": "1.0.0",
-  "description": "flux example",
-   "devDependencies": {
+  "name": "flux-example2",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
     "react-scripts": "0.8.4"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "flux": "^3.1.2",
+    "immutable": "^3.8.1",
+    "keymirror": "^0.1.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },
@@ -14,7 +18,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "author": "Aakash Dodiya",
-  "license": "MIT"
+  }
 }

@@ -15,7 +15,7 @@ var TestStyle = React.createClass({
     return this.setState({dheight: event.target.value });
   },
 	render: function(){
-    var dwidth = this.state.dwidth;
+    var dwidth = this.state.dwidth; 
     var dheight = this.state.dheight;
     //console.log(dwidth+ '' + dheight);
     var divStyle = {

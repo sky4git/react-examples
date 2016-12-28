@@ -1,8 +1,8 @@
 {
-  "name": "flux-example",
-  "version": "1.0.0",
-  "description": "flux example",
-   "devDependencies": {
+  "name": "react-es6",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
     "react-scripts": "0.8.4"
   },
   "dependencies": {
@@ -14,7 +14,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "author": "Aakash Dodiya",
-  "license": "MIT"
+  }
 }
